@@ -143,6 +143,11 @@ span.psw {
     transition: transform .3s ease;
 }
 
+.img-cover > img:hover {
+    -webkit-transform: translate(0px, -4px);
+    transform: translate(0px, -4px);
+}
+
 .product {
     display: flex;
     align-items: center;
@@ -151,11 +156,6 @@ span.psw {
     text-align: center;
     border-radius: 5px;
     transition: transform .15s;
-}
-
-.img-cover > img:hover {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
 }
 
 /* IDs */
