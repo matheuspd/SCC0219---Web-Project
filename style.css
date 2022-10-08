@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 * {
@@ -8,9 +9,9 @@
 
 body {
     background-color: #181818;
-    color: #fff;
-    padding-left: 5%;
-    padding-right: 5%;
+    color: #e7e7e7;
+    padding-left: 2%;
+    padding-right: 2%;
 
     font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
     text-align: left;
@@ -31,7 +32,49 @@ h3 {
     margin-block-end: 1em;
 }
 
-/* CLASSES */
+nav {
+    width: 84%;
+    margin: auto;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #e7e7e7;
+}
+
+nav ul li a:hover{
+    color: #7b7b7b;
+} 
+
+/* CLASSES */
+.header {
+    padding: 10px;
+}
+
+.header_section {
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 5rem;
+    font-weight: 600;
+
+}
+
+.section {
+    background-color: #e7e7e7;
+    color: #181818;
+    border-radius: 10px;
+   
+    padding: 20px;
+}
 
 /* IDs */
