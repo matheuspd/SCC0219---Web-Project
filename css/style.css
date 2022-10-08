@@ -138,6 +138,15 @@ span.psw {
 .img-cover > img {
     width: 300px;
     height: 300px;
+    border-radius: 10%;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 /* IDs */
