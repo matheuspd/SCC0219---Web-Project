@@ -139,6 +139,8 @@ span.psw {
     width: 300px;
     height: 300px;
     border-radius: 10%;
+    -webkit-transition: -webkit-transition .3s ease;
+    transition: transform .3s ease;
 }
 
 .product {
@@ -152,7 +154,8 @@ span.psw {
 }
 
 .img-cover > img:hover {
-    transform: translate(0px, -3px);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 /* IDs */
