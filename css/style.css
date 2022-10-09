@@ -138,6 +138,13 @@ span.psw {
 .img-cover > img {
     width: 300px;
     height: 300px;
+    border-radius: 5px;
+
+    transition: transform .15s;
+}
+
+.img-cover > img:hover {
+    transform: translate(0px, -3px);
 }
 
 /* IDs */
