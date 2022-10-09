@@ -52,7 +52,7 @@
 
 #### Navigation Diagram (Will be updated constantly): https://github.com/matheuspd/SCC0219---Web-Project/blob/main/Diagrama%20Loja.pdf
 
-#### Mockup: 
+#### Mockup (Will be updated constantly): 
 
 ### Comments About the Code
 
