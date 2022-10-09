@@ -38,6 +38,22 @@
 
 ### Project Description
 
+#### Funcionalites:
+* Two types of users (admnistrators, clients)
+* Admin:
+  - Users, products and stock manegement
+  - Sales history
+  - CRUD
+* User:
+  - Login/Sign In
+  - Add products to the cart
+  - Buying options
+  - Review products with ✩✩✩✩✩
+
+#### Navigation Diagram (Will be updated constantly): https://github.com/matheuspd/SCC0219---Web-Project/blob/main/Diagrama%20Loja.pdf
+
+#### Mockup: 
+
 ### Comments About the Code
 
 ### Test Plan
