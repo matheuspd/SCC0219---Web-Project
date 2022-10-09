@@ -60,7 +60,7 @@ form {
     border: 3px solid #f1f1f1;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=date] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -114,6 +114,11 @@ button:hover {
     margin-top: 10%;
 }
 
+.sign_in_page {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 2%;
+}
 .cancelbtn {
     width: auto;
     background-color: #f44336;
