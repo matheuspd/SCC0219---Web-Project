@@ -140,7 +140,9 @@ span.psw {
 .main-logo {
     border-radius: 30%;
     width: 120px;
-    height: 100px; 
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .layout-tes {
