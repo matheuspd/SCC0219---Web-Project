@@ -54,6 +54,8 @@
 
 #### Mockup (Will be updated constantly): 
 
+For now we hava the main page, the login/sign in page and the contact page. 
+
 ### Comments About the Code
 
 ### Test Plan
