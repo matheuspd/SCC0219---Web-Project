@@ -5,8 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    
 </head>
 <body>
+
+    <div class="section contact_page">
+        <h2>Contact us</h2>
+        <p> Give us a shout, we will be happy to help you.<br>
+            We will reply to your email within 24 working hours.
+        </p>
+        <br>
+
+        <form method="post" id="contact-page" accept-charset="UTF-8" class="contact-form">
+
+            <i class="fa fa-user"></i> <label for="name">Name</label>
+            <input type="text" id="name" class="input-full" name="contact[name]" autocapitalize="words" value="">
+
+            <i class="fa fa-envelope"></i> <label for="email">Email</label>
+            <input type="email" id="email" class="input-full" name="contact[email]" autocorrect="off" autocapitalize="off" value="">
+        
+            <i class="fa fa-message"></i> <label for="message">Message</label>
+            <textarea rows="5" id="message" class="input-full" name="contact[body]"></textarea>
+
+            <br>
+            <button type="submit" class="btn">
+                Send
+            </button>
+        </form>
+      </div>
     
 </body>
 </html>
