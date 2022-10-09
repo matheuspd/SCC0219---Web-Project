@@ -104,7 +104,7 @@ button:hover {
     background-color: #e7e7e7;
     color: #181818;
     border-radius: 10px;
-   
+    box-shadow: 0vw 0.1vw 0.2vw 0.1vw #141414;
     padding: 20px;
 }
 
@@ -143,17 +143,32 @@ span.psw {
     height: 100px; 
 }
 
+.layout-tes {
+    width: 300px;
+    margin-bottom: 4%;
+    padding: 4px 0px 4px 0px;
+    background-color: #005F73;
+    border-radius: 0vw 0vw 1vw 1vw;
+    box-shadow: 0vw 0.1vw 0.2vw 0.15vw #D6D6D6;
+    color: #E7E7E7;
+}
+
+.rating {
+  color: #FFB01F;
+}
+
 .img-cover > img {
     width: 300px;
     height: 300px;
-    border-radius: 10%;
+    border-radius: 10% 10% 0% 0%;
+    box-shadow: 0vw 0.1vw 0.2vw 0.15vw #E0E0E0;
     -webkit-transition: -webkit-transition .3s ease;
     transition: transform .3s ease;
 }
 
 .img-cover > img:hover {
-    -webkit-transform: translate(0px, -4px);
-    transform: translate(0px, -4px);
+    -webkit-transform: translate(0px, -6px);
+    transform: translate(0px, -6px);
 }
 
 .product {
