@@ -135,4 +135,9 @@ span.psw {
     height: 100px; 
 }
 
+.img-cover > img {
+    width: 300px;
+    height: 300px;
+}
+
 /* IDs */
