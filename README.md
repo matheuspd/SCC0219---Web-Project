@@ -52,7 +52,7 @@
 
 #### Navigation Diagram (Will be updated constantly): https://github.com/matheuspd/SCC0219---Web-Project/blob/main/Diagrama%20Loja.pdf
 
-#### Mockup (Will be updated constantly): https://www.figma.com/file/ChUXAvdSrFZn4HOzOO8cRY/Web-Project?node-id=0%3A1
+#### Mockup (Will be updated constantly): https://www.figma.com/file/ChUXAvdSrFZn4HOzOO8cRY/Web-Project
 
 For now we hava the main page, the login/sign in page and the contact page. 
 
