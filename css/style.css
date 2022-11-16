@@ -32,6 +32,26 @@ h3 {
     margin-block-end: 1em;
 }
 
+a {
+    color: inherit; 
+}
+
+a:link {
+    text-decoration: none;
+}
+  
+a:visited {
+    text-decoration: none;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
 nav {
     width: 84%;
     margin: auto;
@@ -138,11 +158,9 @@ span.psw {
 }
 
 .main-logo {
-    border-radius: 30%;
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    object-position: center;
+    font-size: xx-large;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: lighter;
 }
 
 .layout-tes {
@@ -159,7 +177,7 @@ span.psw {
   color: #FFB01F;
 }
 
-.img-cover > img {
+.img-cover > a img {
     width: 300px;
     height: 300px;
     border-radius: 10% 10% 0% 0%;
@@ -168,7 +186,7 @@ span.psw {
     transition: transform .3s ease;
 }
 
-.img-cover > img:hover {
+.img-cover > a img:hover {
     -webkit-transform: translate(0px, -6px);
     transform: translate(0px, -6px);
 }
