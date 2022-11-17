@@ -13,6 +13,7 @@
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     
 </head>
+
 <body>
     
     <section class="header">
@@ -29,30 +30,38 @@
         </nav>
     </section>
 
-    <div class="section contact_page">
-        <h2>Contact us</h2>
-        <p> Give us a shout, we will be happy to help you.<br>
-            We will reply to your email within 24 working hours.
-        </p>
-        <br>
-
-        <form method="post" id="contact-page" accept-charset="UTF-8" class="contact-form">
-
-            <i class="fa fa-user"></i> <label for="name">Name</label>
-            <input type="text" id="name" class="input-full" name="contact[name]" autocapitalize="words" value="">
-
-            <i class="fa fa-envelope"></i> <label for="email">Email</label>
-            <input type="email" id="email" class="input-full" name="contact[email]" autocorrect="off" autocapitalize="off" value="">
-        
-            <i class="fa fa-message"></i> <label for="message">Message</label>
-            <textarea rows="5" id="message" class="input-full" name="contact[body]"></textarea>
-
+    <section>
+        <div class="section contact_page">
+            <h2>Contact us</h2>
+            <p> Give us a shout, we will be happy to help you.<br>
+                We will reply to your email within 24 working hours.
+            </p>
             <br>
-            <button type="submit" class="btn">
-                Send
-            </button>
-        </form>
-      </div>
+
+            <form method="post" id="contact-page" accept-charset="UTF-8" class="contact-form">
+
+                <i class="fa fa-user"></i> <label for="name">Name</label>
+                <input type="text" id="name" class="input-full" name="contact[name]" autocapitalize="words" value="">
+
+                <i class="fa fa-envelope"></i> <label for="email">Email</label>
+                <input type="email" id="email" class="input-full" name="contact[email]" autocorrect="off" autocapitalize="off" value="">
+            
+                <i class="fa fa-message"></i> <label for="message">Message</label>
+                <textarea rows="5" id="message" class="input-full" name="contact[body]"></textarea>
+
+                <br>
+                <button type="submit" class="btn">
+                    Send
+                </button>
+            </form>
+        </div>
+    </section>
     
+    <section class="footer">
+        <br>
+        <p>Copyright © 2021-2022 OLYMPUS LTDA.</p>
+        <p><a href="#">Trabalhe conosco</a> - <a href="#">Termos e condições</a> - <a href="#">Como cuidamos da sua privacidade</a> - <a href="#">Acessibilidade</a> - <a href="#">Contato</a> - <a href="#">Informações sobre seguros</a></p>
+        <p>CNPJ n.º 12.345.678/9012-34 / Av. Brasil, nº 1.234, Vila 2, São Carlos/SP - CEP 12345-678 - empresa do grupo Olympus.</p>
+    </section>
 </body>
 </html>
