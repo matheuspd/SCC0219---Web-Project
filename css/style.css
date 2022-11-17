@@ -128,31 +128,11 @@ button:hover {
     padding: 20px;
 }
 
-.login_page {
+.login_page, .sign_in_page, .contact_page, .about_us {
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 5%;
     margin-bottom: 5%;
-}
-
-.sign_in_page {
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 2%;
-}
-
-.contact_page {
-    text-align: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 2%;
-}
-
-.about_us {
-    text-align: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 2%;
 }
 
 .cancelbtn {
