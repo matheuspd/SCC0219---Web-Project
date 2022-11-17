@@ -131,7 +131,8 @@ button:hover {
 .login_page {
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .sign_in_page {
