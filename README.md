@@ -54,7 +54,7 @@
 
 #### Mockup (Will be updated constantly): https://www.figma.com/file/ChUXAvdSrFZn4HOzOO8cRY/Web-Project
 
-For now we hava the all the pages with some functional javascript in the login, products and cart pages. 
+For now we have all the pages with some functional javascript in the login, products and cart pages. 
 
 ### Comments About the Code
 
