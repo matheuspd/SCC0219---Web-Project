@@ -8,7 +8,7 @@ function getdatabase() {
 
     if(database.hasOwnProperty(username) && database[username].password === password) {
         
-        localStorage.setItem("usuario", JSON.stringify(database[username]));
+        localStorage.setItem("user", JSON.stringify(database[username]));
         
         if(database[username].isAdmin) {
             location.href = "admin.html";
