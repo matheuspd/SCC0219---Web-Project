@@ -1,16 +1,20 @@
 "use strict"
 
-document.getElementById("submit").addEventListener("click", getdatabase);
+document.getElementById("submit").addEventListener("click", getDatabase);
 
-function getdatabase() {
+function getDatabase() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    if(database.hasOwnProperty(username) && database[username].password === password) {
+    if(database.hasOwnProperty("users") && database.hasOwnProperty("admins")) {
         
-        localStorage.setItem("user", JSON.stringify(database[username]));
+        let user = getUser(username, password)
+
+        if(user != null) {
+            localStorage.setItem("user", user);
+        }
         
-        if(database[username].isAdmin) {
+        if(user.isAdmin) {
             location.href = "admin.html";
         }
         else {
@@ -19,4 +23,21 @@ function getdatabase() {
     }
 
     alert("User or password incorrect.")
+}
+
+function getUser(username, password) {
+
+    for(let i = 0; i < database.admins.length; i++) {
+        if(database.admins[i].username === username && database.admins[i].password === password) {
+            return database.admins[i]
+        }
+    }
+
+    for(let i = 0; i < database.users.length; i++) {
+        if(database.users[i].username === username && database.users[i].password === password) {
+            return database.users[i]
+        }
+    }
+
+    return null
 }
