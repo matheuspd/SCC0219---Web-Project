@@ -1,10 +1,8 @@
 "use strict"
 
-/*
+let admin = database.admins[0]
 
-document.getElementById("username").innerHTML = user.username
-document.getElementById("email").innerHTML += user.email
-document.getElementById("telephone").innerHTML += user.telephone
-document.getElementById("address").innerHTML += user.address
-
-*/
+document.getElementById("name").innerHTML = admin.name
+document.getElementById("email").innerHTML += admin.email
+document.getElementById("telephone").innerHTML += admin.telephone
+document.getElementById("address").innerHTML += admin.address
