@@ -12,14 +12,14 @@ function getDatabase() {
 
         if(user != null) {
             localStorage.setItem("user", user);
-        }
-        
-        if(user.isAdmin) {
-            location.href = "admin.html";
-        }
-        else {
-            location.href = "user.html";
-        }
+
+            if(user.isAdmin) {
+                location.href = "admin.html";
+            }
+            else {
+                location.href = "user.html";
+            }
+        }        
     }
 
     alert("User or password incorrect.")
