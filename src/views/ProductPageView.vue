@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import AddToCartButton from "../components/AddToCartButton.vue";
+</script>
+
 <template>
         <section class="section">
             <div class="product">
@@ -21,7 +25,7 @@
                         
                         <p>Estoque disponível</p><br> 
 
-                        <button id="buy-product-bttn">ADD TO CART</button>
+                        <AddToCartButton />
                                               
                     </div>
                 </div>
