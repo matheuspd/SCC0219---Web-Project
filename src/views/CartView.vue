@@ -98,10 +98,19 @@ import FinishPurchaseButton from "../components/FinishPurchaseButton.vue";
 
             <FinishPurchaseButton />
         </div>
+        
+        <!--<h1>Empty Cart</h1>-->
 
 </template>
 
 <style scoped>
+
+h1 {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
 .img-cover > img {
     width: 200px;
     height: 200px;

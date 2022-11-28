@@ -10,7 +10,7 @@
             <br>
         
             <label>
-              <input type="checkbox" checked="checked" name="remember"> Remember me
+              <input type="checkbox" checked="true" name="remember"> Remember me
             </label>
             <br>
         

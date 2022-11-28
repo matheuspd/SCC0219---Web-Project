@@ -22,7 +22,7 @@
             <br>
 
             <label>
-              <input type="checkbox" checked="checked" name="remember"> I agree with the terms and conditions
+              <input type="checkbox" checked="true" name="remember"> I agree with the terms and conditions
             </label>
             <br>
 
