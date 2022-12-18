@@ -7,7 +7,6 @@
 ## Students
 
 - Matheus Pereira Dias - 11207752
-- Asafe Henrique de Oliveira Franca - 12745212
 - Jefferson Eduardo Muniz Bueno - 11275255
 
 ## Project Report
@@ -59,6 +58,21 @@ For now we have all the pages with some functional javascript in the login, prod
 ### Comments About the Code
 
 ### Test Plan
+
+Serão feitos testes manuais pelo software Insomnia.
+
+Testes a serem realizados:
+* Como administrador:
+ - Adicionar novo produto
+ - Adicionar novo administrador
+ - Log in e Log out como adiministrador
+* Como usuario:
+ - Se cadastrar
+ - Comprar produto
+* Teste de carrinho
+ - Adicionar produto
+ - Comprar mais produtos do que em estoque
+ - Remover produtos do carrinho
 
 ### Test Results
 
