@@ -26,7 +26,8 @@
     "http": "^0.0.1-security",
     "jsonwebtoken": "^7.4.3",
     "md5": "^2.3.0",
-    "mongoose": "^6.8.0"
+    "mongoose": "^6.8.0",
+    "vue-cli": "^2.9.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
