@@ -7,7 +7,6 @@
 ## Students
 
 - Matheus Pereira Dias - 11207752
-- Asafe Henrique de Oliveira Franca - 12745212
 - Jefferson Eduardo Muniz Bueno - 11275255
 
 ## Project Report
@@ -54,11 +53,27 @@
 
 #### Mockup (Will be updated constantly): https://www.figma.com/file/ChUXAvdSrFZn4HOzOO8cRY/Web-Project
 
-For now we have all the pages with some functional javascript in the login, products and cart pages. 
+For now we have all the pages with some functional javascript in the login, products and cart pages. We did the backend but we are having problems to link it to the frontend side.
 
 ### Comments About the Code
 
 ### Test Plan
+
+Manual tests will be done by the Insomnia software.
+
+Tests to be performed:
+* As an admin:
+  - Add new product
+  - Add new admin
+  - Login and Logout
+* As an user:
+  - Sign In
+  - Buy product
+  - Login and Logout
+* Cart:
+  - Add product
+  - Buy more products than in stock
+  - Remove products from cart
 
 ### Test Results
 
