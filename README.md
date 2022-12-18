@@ -63,16 +63,16 @@ Serão feitos testes manuais pelo software Insomnia.
 
 Testes a serem realizados:
 * Como administrador:
- - Adicionar novo produto
- - Adicionar novo administrador
- - Log in e Log out como adiministrador
+  - Adicionar novo produto
+  - Adicionar novo administrador
+  - Log in e Log out como adiministrador
 * Como usuario:
- - Se cadastrar
- - Comprar produto
+  - Se cadastrar
+  - Comprar produto
 * Teste de carrinho
- - Adicionar produto
- - Comprar mais produtos do que em estoque
- - Remover produtos do carrinho
+  - Adicionar produto
+  - Comprar mais produtos do que em estoque
+  - Remover produtos do carrinho
 
 ### Test Results
 
