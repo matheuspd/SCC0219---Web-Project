@@ -53,7 +53,7 @@
 
 #### Mockup (Will be updated constantly): https://www.figma.com/file/ChUXAvdSrFZn4HOzOO8cRY/Web-Project
 
-For now we have all the pages with some functional javascript in the login, products and cart pages. 
+For now we have all the pages with some functional javascript in the login, products and cart pages. We did the backend but we are having problems to link it to the frontend side.
 
 ### Comments About the Code
 
