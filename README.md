@@ -59,20 +59,21 @@ For now we have all the pages with some functional javascript in the login, prod
 
 ### Test Plan
 
-Serão feitos testes manuais pelo software Insomnia.
+Manual tests will be done by the Insomnia software.
 
-Testes a serem realizados:
-* Como administrador:
-  - Adicionar novo produto
-  - Adicionar novo administrador
-  - Log in e Log out como adiministrador
-* Como usuario:
-  - Se cadastrar
-  - Comprar produto
-* Teste de carrinho
-  - Adicionar produto
-  - Comprar mais produtos do que em estoque
-  - Remover produtos do carrinho
+Tests to be performed:
+* As an admin:
+  - Add new product
+  - Add new admin
+  - Login and Logout
+* As an user:
+  - Sign In
+  - Buy product
+  - Login and Logout
+* Cart:
+  - Add product
+  - Buy more products than in stock
+  - Remove products from cart
 
 ### Test Results
 
