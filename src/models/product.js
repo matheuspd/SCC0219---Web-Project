@@ -38,7 +38,10 @@ const schema = new Schema({
     tags: [{
         type: String,
         required: true
-    }]
+    }],
+    image: {
+        type: String,
+    }
 });
 
 module.exports = mongoose.model("Product", schema);

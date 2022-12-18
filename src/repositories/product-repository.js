@@ -18,6 +18,12 @@ exports.getBySlug = async(slug) => {
     return res;
 }
 
+exports.getById = async(id) => {
+    const res = await Product
+        .findById(id);
+    return res;
+}
+
 exports.getByTag = async(tag) => {
     const res = await Product.find({
             tags: tag,
@@ -28,17 +34,6 @@ exports.getByTag = async(tag) => {
 
 exports.create = async(data) => {
     var product = new Product(data);
-    
-    /* req.body = 
-    product.title = req.body.title;
-    product.slug = req.body.slug;
-    product.description = req.body.description;
-    product.price = req.body.price;
-    product.rating = req.body.rating;
-    product.active = req.body.active;
-    product.tags = req.body.tags;
-    */
-
     await product.save();
 }
 

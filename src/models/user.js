@@ -17,11 +17,12 @@ const schema = new Schema({
         trim: true,
         unique: true
     },
-    isAdmin: {
-        type: Boolean,
+    roles: [{
+        type: String,
         required: true,
-        default: false
-    },
+        enum: ['user', 'admin'],
+        default: 'user'
+    }],
     name: {
         type: String,
         required: true,
@@ -37,13 +38,12 @@ const schema = new Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        pattern: "^(\\([0-9]{2}\\))?[0-9]{4}-[0-9]{4}$"
     },
     address: {
         type: String,
         required: true,
-        trim: true,
-        unique: true
+        trim: true
     }
 });
 

@@ -2,6 +2,8 @@
 
 const ValidationContract = require("../validators/validator");
 const repository = require("../repositories/product-repository");
+const guid = require("guid");
+var config = require("../config");
 
 // Get all products
 exports.get = async(req, res, next) => {
@@ -27,6 +29,17 @@ exports.getBySlug = async(req, res, next) => {
         })
     }
 };
+
+exports.getById = async(req, res, next) => {
+    try {
+        var data = await repository.getById(req.params.id);
+        res.status(200).send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: "Failed to process the request."
+        });
+    }
+}
 
 exports.getByTag = async(req, res, next) => {
     try {
