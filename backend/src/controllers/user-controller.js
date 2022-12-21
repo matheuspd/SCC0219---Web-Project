@@ -49,6 +49,15 @@ exports.getById = async(req, res, next) => {
     };
 }
 
+exports.getByUsername = async(req, res, next) => {
+    try {
+        var data = await repository.getByUsername({username: req.params.username});
+        res.status(200).send(data);
+    } catch(e) {
+        res.status(500).send("Failed to process the request.");
+    };
+}
+
 exports.authenticate = async(req, res, next) => {
     try {
         const user = await repository.authenticate({

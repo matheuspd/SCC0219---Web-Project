@@ -41,6 +41,11 @@ const schema = new Schema({
     }],
     image: {
         type: String,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 10
     }
 });
 

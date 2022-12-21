@@ -28,7 +28,7 @@ exports.getByTag = async(tag) => {
     const res = await Product.find({
             tags: tag,
             active: true
-        }, "title description price slug rating tags");
+        }, "title description price quantity slug rating tags");
     return res;
 }
 
@@ -46,7 +46,8 @@ exports.update = async(id, data) => {
                 price: data.price,
                 rating: data.rating,
                 tags: data.tags,
-                image: data.image
+                image: data.image,
+                quantity: data.quantity
             }
     });
 }

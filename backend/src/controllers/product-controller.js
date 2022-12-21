@@ -59,6 +59,7 @@ exports.post = async(req, res, next) => {
     contract.hasMinLen(req.body.slug, 3, "The slug must contain 3 or more letters.");
     contract.hasMinLen(req.body.description, 3, "The description must contain 3 or more letters.");
     contract.isGreaterThan(req.body.price, 0, "The price must be zero or greater than zero.");
+    contract.isGreaterThan(req.body.quantity, 0, "The quantity must be zero or greater than zero.");
     contract.isGreaterThan(req.body.rating, 0, "The rating must be zero or greater than zero.");
     contract.isLessThan(req.body.rating, 5, "The max rating must be 5 or less.");
 
@@ -88,6 +89,7 @@ exports.put = async(req, res, next) => {
     contract.hasMinLen(req.body.slug, 3, "The slug must contain 3 or more letters.");
     contract.hasMinLen(req.body.description, 3, "The description must contain 3 or more letters.");
     contract.isGreaterThan(req.body.price, 0, "The price must be zero or greater than zero.");
+    contract.isGreaterThan(req.body.quantity, 0, "The quantity must be zero or greater than zero.");
     contract.isGreaterThan(req.body.rating, 0, "The rating must be zero or greater than zero.");
     contract.isLessThan(req.body.rating, 5, "The max rating must be 5 or less.");
 
