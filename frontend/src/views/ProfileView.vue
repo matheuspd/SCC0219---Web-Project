@@ -41,7 +41,7 @@
             <input v-model="newUname" type="text" placeholder="Username" name="uname" required>
             <br>
 
-            <i class="fa fa-user"></i> <label for="uname"><b>Full name</b></label>
+            <i class="fa fa-user"></i> <label for="name"><b>Full name</b></label>
             <input v-model="newName" type="text" placeholder="Full Name" name="name" required>
             <br>
 
@@ -61,8 +61,37 @@
             <input v-model="newPsw" type="password" placeholder="Password" name="psw" required>
             <br>
 
-            <button type="submit" id="logout" v-on:click="update">Update Profile</button>
+            <button type="submit" id="update" v-on:click="update">Update Profile</button>
 
+            <h2>Add New Product</h2>
+
+            <i class="fa-sharp fa-solid fa-pen-nib"></i> <label for="title"><b>Title</b></label>
+            <input v-model="prod.title" type="text" placeholder="Title" name="title" required>
+            <br>
+
+            <i class="fa-sharp fa-solid fa-pen-nib"></i> <label for="slug"><b>Slug</b></label>
+            <input v-model="prod.slug" type="text" placeholder="Slug" name="slug" required>
+            <br>
+
+            <i class="fa-sharp fa-solid fa-pen-nib"></i> <label for="description"><b>Description</b></label>
+            <input v-model="prod.description" type="text" placeholder="Description" name="description" required>
+            <br>
+
+            <i class="fa-sharp fa-solid fa-tag"></i> <label for="price"><b>Price</b></label>
+            <input v-model="prod.price" type="text" placeholder="0" name="price" required>
+            <br>
+
+            <i class="fa-sharp fa-solid fa-pen-nib"></i> <label for="tags"><b>Tags</b></label>
+            <input v-model="prod.tags" type="text" placeholder="Tags" name="tags" required>
+            <br>
+
+            <i class="fa-sharp fa-solid fa-film"></i> <label for="image"><b>Image path</b></label>
+            <input v-model="prod.image" type="text" placeholder="Image path" name="image" required>
+            <br>
+
+            <button type="submit" id="addAdmin" v-on:click="addProd">Add Product</button>
+
+            <br>
             <button type="submit" id="logout" v-on:click="logout">Logout</button>
         </div>
 
@@ -130,7 +159,15 @@ export default {
         newPhone:"",
         newAddress:"",
         session: false,
-        user: {}
+        user: {},
+        prod: {
+          title:"",
+          slug:"",
+          description:"",
+          price:0,
+          image:"",
+          tags:""
+        }
     }
   },
   created() {
@@ -209,6 +246,33 @@ export default {
       }
       catch(e) {
         alert("Error updating the profile.");
+      }
+    },
+    addProd: async function() {
+      try{
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            token: sessionStorage.getItem("token"),
+            title: this.prod.title,
+            slug: this.prod.slug,
+            description: this.prod.description,
+            price: this.prod.price,
+            image: this.prod.image,
+            tags: this.prod.tags.split(' ')            
+          })
+        };
+        let resp = await fetch("http://localhost:3000/products", requestOptions);
+        resp = await resp.json();
+        //console.log("resp: " + JSON.stringify(resp));
+        if(resp.message) {
+            alert("Product succesfully added.");
+        }
+        else{alert("Error adding new product.")}
+      }
+      catch(e) {
+        alert("Error adding new product.");
       }
     }
   }

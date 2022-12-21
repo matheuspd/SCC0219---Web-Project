@@ -6,7 +6,7 @@ const Product = mongoose.model("Product");
 exports.get = async() => {
     const res = await Product.find({
             active: true
-        }, "title price slug rating tags");
+        });
     return res;
 }
 
@@ -14,7 +14,7 @@ exports.getBySlug = async(slug) => {
     const res = await Product.findOne({
             slug: slug,
             active: true
-        }, "title description price slug rating tags");
+        });
     return res;
 }
 
@@ -45,7 +45,8 @@ exports.update = async(id, data) => {
                 description: data.description,
                 price: data.price,
                 rating: data.rating,
-                tags: data.tags
+                tags: data.tags,
+                image: data.image
             }
     });
 }
