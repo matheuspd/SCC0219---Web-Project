@@ -93,7 +93,7 @@ export default {
           else{alert("Error registering (username/email already taken or incorrectly filled data).")}
         }
         catch(e) {
-          alert("Error registering.");
+          alert("Error registering (username/email already taken or incorrectly filled data).");
         }
       }
     }
