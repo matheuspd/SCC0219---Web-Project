@@ -437,6 +437,11 @@ export default {
           return;
         }
 
+        if(this.removeUser.username == "admin") {
+          alert("Cannot remove the main admin.");
+          return;
+        }
+
         const requestOptions2 = {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
