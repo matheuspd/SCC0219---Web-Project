@@ -5,25 +5,19 @@ const Order = mongoose.model("Order");
 
 exports.getAll = async() => {
     var res = await Order
-        .find({}, 'number status user items')
-        .populate('user', 'name')
-        .populate('items.product', 'title');
+        .find({});
     return res;
 }
 
 exports.getByUserId = async(id) => {
     var res = await Order
-        .find({user: {_id: id}}, 'number status user items')
-        .populate('user', 'name')
-        .populate('items.product', 'title');
+        .find({user: {_id: id}});
     return res;
 }
 
 exports.getById = async(id) => {
     var res = await Order
-        .find({id}, 'number status user items')
-        .populate('user', 'name')
-        .populate('items.product', 'title');
+        .find({id});
     return res;
 }
 

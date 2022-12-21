@@ -377,7 +377,12 @@ export default {
     },
     getUser: async function() {
       try {
-        let resp = await fetch("http://localhost:3000/users/" + sessionStorage.getItem("id"));
+        const id = sessionStorage.getItem("id");
+        if(id == null) {
+          this.session = false;
+          return;
+        }
+        let resp = await fetch("http://localhost:3000/users/" + id);
         this.user = await resp.json();
         this.session = true;
       }

@@ -37,7 +37,7 @@
 
 <script lang="ts">
 export default {
-name: "ProductsView",
+name: "HomeView",
 data() {
     return {
         allProducts: [{

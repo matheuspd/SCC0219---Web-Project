@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import AddToCartButton from "../components/AddToCartButton.vue";
-</script>
-
 <template>
         <section class="section">
             <div class="product">
@@ -19,12 +15,12 @@ import AddToCartButton from "../components/AddToCartButton.vue";
 
                         <p>{{product.description}}</p><br>                        
                         
-                        <p v-show="stock">Available stock</p>
+                        <p v-show="stock">Available stock: {{ product.quantity }} remaining products.</p>
                         <p v-show="!stock">Unavailable stock</p>
                         <br> 
                         
-                        <div  v-show="stock" >
-                            <AddToCartButton />
+                        <div v-show="stock">
+                            <button v-on:click="addProd" id="buy-product-bttn">ADD TO CART</button>
                         </div>                 
                     </div>
                 </div>
@@ -85,7 +81,7 @@ import AddToCartButton from "../components/AddToCartButton.vue";
 
 <script lang="ts">
 export default {
-    name: "ProfileView",
+    name: "ProductPageView",
     data() {
       return {
           product: {
@@ -99,7 +95,17 @@ export default {
             rating:0
           },
           slug:"",
-          stock:false
+          stock:false,
+          order: {
+            number:"",
+            user: {},
+            status:"created",
+            items: [{
+                quantity:0,
+                prod: {},
+                price:0
+            }]
+          }
       }
     },
     created() {
@@ -124,6 +130,46 @@ export default {
         }
         catch(e) {
             alert(e);
+        }
+      },
+      addProd: async function() {
+        try {
+            this.order.items[0].quantity = 1;
+            this.order.items[0].price = this.product.price;
+            this.order.items[0].prod = this.product._id;
+            console.log(this.order.items);
+            if(this.product.quantity <= 0) {
+                alert("Product out of stock");
+                return;
+            }
+            if(sessionStorage.getItem("id") == null) {
+                alert("You must be logged to buy a product");
+                return;
+            }
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    token: sessionStorage.getItem("token"),
+                    user: sessionStorage.getItem("id"),
+                    items: this.order.items
+                })
+            };
+            let resp = await fetch("http://localhost:3000/orders", requestOptions);
+            this.product = await resp.json();
+
+            if(this.product) {
+                alert("Product added to cart.");
+                window.location.replace("/cart");
+            }
+            else{
+                alert("Error adding product to cart.");
+                window.location.replace("/products");
+            }
+        }
+        catch(e) {
+            alert("Error adding product to cart.");
+            window.location.replace("/products");
         }
       }
     }

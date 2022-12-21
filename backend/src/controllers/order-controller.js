@@ -38,10 +38,9 @@ exports.getById = async(req, res, next) => {
 }
 
 exports.post = async(req, res, next) => {
-    try {
-        
+    try {        
         await repository.create({
-            customer: data.id,
+            user: req.body.user,
             number: guid.raw().substring(0, 6),
             items: req.body.items
         });
