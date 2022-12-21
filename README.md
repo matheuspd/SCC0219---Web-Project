@@ -79,6 +79,16 @@ Tests to be performed:
 
 ### Build Procedures
 
+Go to backend folder:
+* npm install
+* npm start
+
+Go to frontend folder:
+* npm install
+* npm run dev
+
+Open the url in the browser.
+
 ### Problems
 
 ### Comments
