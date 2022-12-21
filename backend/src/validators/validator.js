@@ -32,13 +32,19 @@ ValidationContract.prototype.isEmail = (value, message) => {
         errors.push({ message: message });
 }
 
+ValidationContract.prototype.isPhone = (value, message) => {
+    var reg = new RegExp(/\(\d{2}\)\d{4}\-\d{4}/gm);
+    if (!reg.test(value))
+        errors.push({ message: message });
+}
+
 ValidationContract.prototype.isGreaterThan = (value, number, message) => {
-    if (!value || value < number)
+    if (value < number)
         errors.push({ message: message });
 }
 
 ValidationContract.prototype.isLessThan = (value, number, message) => {
-    if (!value || value > number)
+    if (value > number)
         errors.push({ message: message });
 }
 

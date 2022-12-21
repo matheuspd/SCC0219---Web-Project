@@ -9,6 +9,7 @@ exports.post = async(req, res, next) => {
     let contract = new ValidationContract();
     contract.hasMinLen(req.body.name, 3, "The name must contain at least 3 characters.");
     contract.isEmail(req.body.email, "Invalid e-mail.");
+    contract.isPhone(req.body.telephone, "Invalid telephone.");
     contract.hasMinLen(req.body.username, 4, "The username must contain at least 4 characters.");
     contract.hasMinLen(req.body.password, 4, "The password must contain at least 6 characters.");
 
@@ -71,10 +72,7 @@ exports.authenticate = async(req, res, next) => {
 
         res.status(201).send({
             token: token,
-            data: {
-                email: user.email,
-                name: user.name
-            }
+            user: user
         });
     } catch (e) {
         res.status(500).send({
@@ -122,6 +120,7 @@ exports.put = async(req, res, next) => {
     let contract = new ValidationContract();
     contract.hasMinLen(req.body.name, 3, "The name must contain at least 3 characters.");
     contract.isEmail(req.body.email, "Invalid e-mail.");
+    contract.isPhone(req.body.telephone, "Invalid telephone.");
     contract.hasMinLen(req.body.username, 4, "The username must contain at least 4 characters.");
     contract.hasMinLen(req.body.password, 4, "The password must contain at least 6 characters.");
 

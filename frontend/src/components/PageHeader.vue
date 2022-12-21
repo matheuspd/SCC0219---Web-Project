@@ -3,7 +3,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-    <header>
     <nav>
         <h1 class="main-logo">OLYMPUS</h1>
         <ul>
@@ -12,21 +11,15 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink to="/products"><i class="fa-solid fa-bag-shopping"></i> Products</RouterLink>
           <RouterLink to="/about"><i class="fa-solid fa-circle-info"></i> About us</RouterLink>
           <RouterLink to="/contact"><i class="fa fa-phone"></i> Contact</RouterLink>
-          <RouterLink to="/login"><i class="fa fa-user"></i> Login</RouterLink>
+          <RouterLink to="/login"><i class="fa fa-user"></i> Profile</RouterLink>
           <RouterLink to="/cart"><i class="fa-solid fa-cart-shopping"></i> Cart</RouterLink>
         </ul>
     </nav>
-
-</header>
 
 <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
 nav {
   width: 100%;
@@ -55,18 +48,6 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--header-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   nav {
     text-align: left;
     margin-left: -1rem;

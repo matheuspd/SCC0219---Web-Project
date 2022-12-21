@@ -9,5 +9,6 @@ router.get("/", controller.getAll);
 router.get("/user/:id", authService.authorize, controller.getByUserId);
 router.get("/:id", authService.isAdmin, controller.getById);
 router.post("/", controller.post);
+router.delete("/:id", authService.isAdmin, controller.delete);
 
 module.exports = router;

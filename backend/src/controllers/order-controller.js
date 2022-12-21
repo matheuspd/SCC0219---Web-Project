@@ -59,7 +59,9 @@ exports.post = async(req, res, next) => {
 exports.delete = async(req, res, next) => {
     try {
         var data = await repository.delete(req.params.id);
-        res.status(200).send(data);
+        res.status(200).send({
+            message: "Order succesfully removed."
+        });
     } catch (e) {
         res.status(500).send({
             message: "Failed to process the request."
