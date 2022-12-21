@@ -6,27 +6,26 @@ import AddToCartButton from "../components/AddToCartButton.vue";
         <section class="section">
             <div class="product">
                 <div class="img-cover">
-                    <img src="@/assets/img/shirts/1.jpg" class="logo">
+                    <img :src="`/${product.image}`" class="logo">
                     <div class="layout-tes">
-                        <h2>Product Name</h2>
+                        <h2>{{product.title}}</h2>
                         <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
+                            Rating: {{ product.rating }}<i class="bx bxs-star"></i>
                         </div>
 
                         <div class="price">
-                            <h3>500R$</h3>
+                            <h3>R$ {{ product.price }},00</h3>
                         </div> 
 
-                        <p>Description of the product</p><br>                        
+                        <p>{{product.description}}</p><br>                        
                         
-                        <p>Estoque disponível</p><br> 
-
-                        <AddToCartButton />
-                                              
+                        <p v-show="stock">Available stock</p>
+                        <p v-show="!stock">Unavailable stock</p>
+                        <br> 
+                        
+                        <div  v-show="stock" >
+                            <AddToCartButton />
+                        </div>                 
                     </div>
                 </div>
             </div>
@@ -83,3 +82,50 @@ import AddToCartButton from "../components/AddToCartButton.vue";
     box-shadow: 0.05em 0.05em;
 }
 </style>
+
+<script lang="ts">
+export default {
+    name: "ProfileView",
+    data() {
+      return {
+          product: {
+            title:"",
+            slug:"",
+            description:"",
+            price:0,
+            image:"",
+            tags:"",
+            quantity:0,
+            rating:0
+          },
+          slug:"",
+          stock:false
+      }
+    },
+    created() {
+      this.slug = this.getUrlVar();
+      this.getProd();
+    },
+    methods: {
+      getUrlVar() {
+        let search = window.location.search.replace(/^\?/,'').replace(/\+/g,' ');
+        let slug  = search.split('=')[1];
+        //console.log(slug);
+        
+        return slug;
+      },
+      getProd: async function () {
+        try {
+            let resp = await fetch("http://localhost:3000/products/" + this.slug);
+            this.product = await resp.json();
+            if(this.product.quantity > 0) {
+                this.stock = true;
+            }
+        }
+        catch(e) {
+            alert(e);
+        }
+      }
+    }
+  }
+  </script>

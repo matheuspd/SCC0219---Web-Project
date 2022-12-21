@@ -28,7 +28,7 @@ const schema = new Schema({
     rating: {
         type: Number,
         required: true,
-        default: 0
+        default: 1
     },
     active: {
         type: Boolean,

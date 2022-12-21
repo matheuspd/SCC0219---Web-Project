@@ -4,140 +4,15 @@
                 <h1><span>All Products</span></h1>
             </div>
             <div class="product">
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/1.jpg"  class="logo"></a>
+                <div class="img-cover" v-for="prod in allProducts">
+                    <a :href = "`/productpage?slug=${prod.slug}`"><img :src="`/${prod.image}`" class="logo"></a>
                     <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
+                        <a :href="`/productpage?slug=${prod.slug}`"><p>{{prod.title}}</p></a>
                         <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
+                            Rating: {{ prod.rating }}<i class="bx bxs-star"></i>
                         </div>
                         <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-                
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/2.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/3.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/4.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/5.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/6.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/7.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
-                        </div>
-                    </div>
-                </div>
-
-                <div class="img-cover">
-                    <a href="/productpage"><img src="@/assets/img/shirts/8.jpg"  class="logo"></a>
-                    <div class="layout-tes">
-                        <a href="/productpage"><p>Test</p></a>
-                        <div class="rating">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bx-star"></i>
-                        </div>
-                        <div class="price">
-                            500R$
+                            R$ {{ prod.price }}
                         </div>
                     </div>
                 </div>
@@ -155,3 +30,38 @@
   }
 }
 </style>
+
+<script lang="ts">
+export default {
+    name: "ProductsView",
+    data() {
+        return {
+            allProducts: [{
+                title:"",
+                slug:"",
+                description:"",
+                price:0,
+                image:"",
+                tags:"",
+                quantity:0,
+                rating:0
+            }]
+        }
+    },
+    created() {
+        this.getProducts();
+    },
+    methods: {
+        getProducts: async function () {
+            try {
+                let resp = await fetch("http://localhost:3000/products");
+                this.allProducts = await resp.json();
+            }
+            catch(e) {
+                alert(e);
+            }
+        }
+    }
+
+}
+</script>
