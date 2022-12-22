@@ -55,6 +55,20 @@ exports.post = async(req, res, next) => {
     }
 }
 
+exports.put = async(req, res, next) => {
+    try {        
+        await repository.update(req.body);
+        res.status(201).send({
+            message: "Successfully registered order."
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({
+            message: "Failed to process the request."
+        });
+    }
+}
+
 exports.delete = async(req, res, next) => {
     try {
         var data = await repository.delete(req.params.id);

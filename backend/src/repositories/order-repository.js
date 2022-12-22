@@ -26,6 +26,17 @@ exports.create = async(data) => {
     await order.save();
 }
 
+exports.update = async(data) => {
+    await Order.findOneAndUpdate({
+        user: {_id: data.user},
+        status: "created"
+        },
+        {$set: {
+            items: data.items
+        }}
+    )
+}
+
 exports.delete = async(id) => {
     await Order.findByIdAndRemove(id);
 }

@@ -20,6 +20,9 @@
                         <br> 
                         
                         <div v-show="stock">
+                            <i class="fa fa-tag"></i> <label for="uname"><b>Quantity</b></label>
+                            <input v-model="quantity" style="width:10%; margin:10px" type="number" id="quantity" placeholder=1 name="quantity" required>
+                            <br>
                             <button v-on:click="addProd" id="buy-product-bttn">ADD TO CART</button>
                         </div>                 
                     </div>
@@ -98,14 +101,15 @@ export default {
           stock:false,
           order: {
             number:"",
-            user: {},
+            user: "",
             status:"created",
             items: [{
                 quantity:0,
-                prod: {},
+                product: "",
                 price:0
             }]
-          }
+          },
+          quantity:1
       }
     },
     created() {
@@ -134,41 +138,150 @@ export default {
       },
       addProd: async function() {
         try {
-            this.order.items[0].quantity = 1;
-            this.order.items[0].price = this.product.price;
-            this.order.items[0].prod = this.product._id;
-            console.log(this.order.items);
-            if(this.product.quantity <= 0) {
-                alert("Product out of stock");
-                return;
-            }
             if(sessionStorage.getItem("id") == null) {
                 alert("You must be logged to buy a product");
                 return;
             }
-            const requestOptions = {
+
+            if(this.product.quantity <= 0) {
+                alert("Product out of stock");
+                return;
+            }
+
+            if(this.quantity > this.product.quantity) {
+                alert("You can't add more products than the available stock");
+                return;
+            }
+
+            const requestOptions1 = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
-                    token: sessionStorage.getItem("token"),
-                    user: sessionStorage.getItem("id"),
-                    items: this.order.items
+                    token: sessionStorage.getItem("token")
                 })
             };
-            let resp = await fetch("http://localhost:3000/orders", requestOptions);
-            this.product = await resp.json();
+            // Get user orders
+            let resp1 = await fetch("http://localhost:3000/orders/user/" + sessionStorage.getItem("id"), requestOptions1);
+            resp1 = await resp1.json();
 
-            if(this.product) {
-                alert("Product added to cart.");
-                window.location.replace("/cart");
+            if(resp1.length == 0) {
+                this.order.items[0].quantity = this.quantity;
+                this.order.items[0].price = this.product.price * this.quantity;
+                this.order.items[0].product = this.product._id;
+                //console.log(this.order.items);
+                
+                const requestOptions2 = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        token: sessionStorage.getItem("token"),
+                        user: sessionStorage.getItem("id"),
+                        items: this.order.items
+                    })
+                };
+                let resp2 = await fetch("http://localhost:3000/orders", requestOptions2);
+                this.product = await resp2.json();
+
+                if(this.product) {
+                    alert("Product added to cart.");
+                    window.location.replace("/cart");
+                }
+                else{
+                    alert("Error adding product to cart.");
+                    window.location.replace("/products");
+                }
             }
-            else{
-                alert("Error adding product to cart.");
-                window.location.replace("/products");
+            else {
+                let found = 0;
+                for(let i = 0; i < resp1.length; i++) {
+                    if(resp1[i].status == "created") {
+                        this.order = resp1[i];
+                        found = 1;
+                        break;
+                    }
+                }
+                //console.log(this.order);
+                //console.log(found);
+                if(found == 1) {
+                    let foundItem = 0;
+                    let index = this.order.items.length;
+                    for(let i = 0; i < this.order.items.length; i++) {
+                        if(this.product._id == this.order.items[i].product) {
+                            index = i;
+                            foundItem = 1;
+                            break;
+                        }
+                    }
+                    //console.log(foundItem);
+                    //console.log(index);
+                    if(foundItem == 1) {
+                        //console.log(this.order.items);
+                        this.order.items[index].quantity +=  this.quantity;
+                        this.order.items[index].price += this.product.price * this.quantity;
+                        //console.log(this.order.items);  
+                    }
+                    else {
+                        //console.log(this.order.items);
+                        this.order.items[index] = {
+                            quantity: this.quantity,
+                            price: this.product.price * this.quantity,
+                            product: this.product._id
+                        }
+                        //console.log(this.order.items);
+                    }
+
+                    const requestOptions2 = {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ 
+                            token: sessionStorage.getItem("token"),
+                            user: sessionStorage.getItem("id"),
+                            items: this.order.items
+                        })
+                    };
+                    let resp2 = await fetch("http://localhost:3000/orders", requestOptions2);
+                    this.product = await resp2.json();
+                
+                    if(this.product) {
+                        alert("Product added to cart.");
+                        window.location.replace("/cart");
+                    }
+                    else{
+                        alert("Error adding product to cart.");
+                        window.location.replace("/products");
+                    }
+                }
+                else {
+                    this.order.items[0].quantity = this.quantity;
+                    this.order.items[0].price = this.product.price * this.quantity;
+                    this.order.items[0].product = this.product._id;
+                    //console.log(this.order.items);
+                    
+                    const requestOptions2 = {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ 
+                            token: sessionStorage.getItem("token"),
+                            user: sessionStorage.getItem("id"),
+                            items: this.order.items
+                        })
+                    };
+                    let resp2 = await fetch("http://localhost:3000/orders", requestOptions2);
+                    this.product = await resp2.json();
+
+                    if(this.product) {
+                        alert("Product added to cart.");
+                        window.location.replace("/cart");
+                    }
+                    else{
+                        alert("Error adding product to cart.");
+                        window.location.replace("/products");
+                    }
+                }
             }
         }
         catch(e) {
-            alert("Error adding product to cart.");
+            alert("Error adding product to cart." + e);
             window.location.replace("/products");
         }
       }

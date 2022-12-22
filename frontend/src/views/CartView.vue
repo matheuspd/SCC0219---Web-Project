@@ -3,31 +3,30 @@
             <div v-show="emptyCart">
                 <h1>Empty Cart</h1>
             </div>
-            <div v-show="!emptyCart" v-for="prod in orders">
-                <div v-if="prod.user == userId && prod.status=='created'" class="img-cover">
-                    <img src="@/assets/img/shirts/1.jpg" class="logo">
+            <div v-show="!emptyCart" v-for="prod in orders">                
+                <div v-for="(p, index) in products" :key="index" class="img-cover" v-if="prod.user == userId && prod.status=='created'">
+                    <img :src="`/${p.image}`" class="logo">
                     <div class="layout-tes">
-                        <h3>Product Name</h3>
+                        <h3>{{p.title}}</h3>
                         <div class="rating">
-                            <i class="bx bxs-star"></i>
-                        </div>
-
-                        <div class="price">
-                            <h4>500R$</h4>
+                            Rating: {{ p.rating }}<i class="bx bxs-star"></i>
                         </div> 
-
-                        <p>Description of the product</p>
-
+                        <p>{{ p.description }}</p> 
+                        <div class="quantity">
+                            <h4>Quantity: {{ prod.items[index].quantity }}</h4>
+                        </div> 
+                        <div class="price">
+                            <h4>Price: R${{ p.price * prod.items[index].quantity }},00</h4>
+                        </div>                       
                     </div>
-                </div>
+                </div>                
             </div>
-
         </div>
 
         <div class="finish-purchase" v-show="!emptyCart">
 
             <div>
-                <h2>TOTAL: 2000R$</h2> 
+                <h2>TOTAL: R${{ total }},00</h2> 
             </div>
 
             <button v-on:click="" id="buy-product-bttn">Finish Purchase</button>
@@ -41,6 +40,10 @@ h1 {
     text-align: center;
     margin: 20px;
     padding: 20px;
+}
+
+.img-cover {
+    float:left;
 }
 
 .img-cover > img {
@@ -106,7 +109,7 @@ export default {
                 status:"created",
                 items:[{
                     quantity:1,
-                    _id: "",
+                    product: "",
                     price:0
                 }]
             }],
@@ -121,12 +124,12 @@ export default {
                 tags:"",
                 quantity:0,
                 rating:0
-            }]
+            }],
+            total:0
         }
     },
     created() {
         this.getOrders();
-        this.getUser();
     },
     methods: {
         getOrders: async function () {
@@ -143,6 +146,7 @@ export default {
                     this.emptyCart = true;
                     return;
                 }
+                this.userId = id;
 
                 let resp = await fetch("http://localhost:3000/orders/user/" + id, requestOptions);
                 this.orders = await resp.json();
@@ -153,19 +157,43 @@ export default {
                 else{
                     this.emptyCart = true;
                 }
+                this.getProdById();
             }
             catch(e) {
                 alert(e);
             }
         },
-        getUser() {
-            let id = sessionStorage.getItem("id");
-            if(id != null) this.userId = id;
-        },
         getProdById: async function() {
-
+            try {                
+                for(let i = 0; i < this.orders.length; i++) {
+                    if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
+                        for(let j = 0; j < this.orders[i].items.length; j++) {
+                            const requestOptions = {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ 
+                                    token: sessionStorage.getItem("token")
+                                })
+                            };
+                            let resp = await fetch("http://localhost:3000/products/admin/" + this.orders[i].items[j].product, requestOptions);
+                            this.products[j] = await resp.json();
+                            this.total += this.orders[i].items[j].quantity * this.products[j].price
+                        }
+                        return;
+                    }
+                }                
+            } catch (e) {
+                alert(e);
+            }
+        },
+        finishPurchase() {
+            /*for(let i = 0; i < this.orders.length; i++) {
+                if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
+                    this.orders[i].status == "done";
+                    return;
+                }
+            }*/
         }
     }
-
 }
 </script>
