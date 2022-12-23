@@ -18,8 +18,6 @@
                         <div class="price">
                             <h4>Price: R${{ p.price * prod.items[index].quantity }},00</h4>
                         </div>
-                        
-                        <button type="button" class="cancelbtn" v-on:click="rmItem(prod.items[index].product)" id="bttn">Remove Item</button>
                     </div>
                 </div>                
             </div>
@@ -76,12 +74,6 @@ h1 {
     color: #E7E7E7;
     float: inline-end;
     margin-bottom: 10px;
-}
-
-.cancelbtn {
-    float: right;
-    padding: 2%;
-    margin: 1%;
 }
 
 #buy-product-bttn {
@@ -162,22 +154,16 @@ export default {
                 for(let i = 0; i < this.orders.length; i++) {
                     if(this.orders.length == 0) {
                         this.emptyCart = true;
-                        return;
+                        break;
                     }
                     if(this.orders[i].status == "created") {
-                        if(this.orders[i].items.length == 0) {
-                            this.emptyCart = true;
-                            return;
-                        }
-                        else {
-                            this.emptyCart = false;
-                            this.orders = [{
-                                user: this.orders[i].user,
-                                items: this.orders[i].items,
-                                status: this.orders[i].status
-                            }]
-                            break;
-                        }                        
+                        this.emptyCart = false;
+                        this.orders = [{
+                            user: this.orders[i].user,
+                            items: this.orders[i].items,
+                            status: this.orders[i].status
+                        }]
+                        break;
                     }                   
                 }
                 this.getProdById();
@@ -253,43 +239,13 @@ export default {
                         break;
                     }
                 }
+                alert("Purchase finished.")
                 window.location.replace("/");
             }
             catch(e) {
                 alert(e);
             }
-        },
-        rmItem: async function(id: String) {
-            try {                
-                for(let i = 0; i < this.orders.length; i++) {
-                    if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
-                        //console.log(this.orders[i])
-                        for(let j = 0; j < this.orders[i].items.length; j++) {
-                            if(this.orders[i].items[j].product == id) {
-                                this.orders[i].items.splice(j,1);
-                                const requestOptions = {
-                                    method: "PUT",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({ 
-                                        token: sessionStorage.getItem("token"),
-                                        user: sessionStorage.getItem("id"),
-                                        status: "created",
-                                        items: this.orders[i].items
-                                    })
-                                };
-                                let resp = await fetch("http://localhost:3000/orders", requestOptions);
-                                resp = await resp.json();
-                                //console.log("resp: " + JSON.stringify(resp1));                             
-                            }
-                            break;                            
-                        }
-                        window.location.reload();
-                    }
-                }                
-            } catch (e) {
-                alert(e);
-            }
-        }       
+        }        
     }
 }
 </script>
