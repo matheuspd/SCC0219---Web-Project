@@ -60,4 +60,10 @@ ValidationContract.prototype.isValid = () => {
     return errors.length == 0;
 }
 
+ValidationContract.prototype.isImage = (value, message) => {
+    var reg = new RegExp(/(\.\/src\/assets\/img\/shirts\/(\w*)\.jpg)|(^$)/gm);
+    if (!reg.test(value))
+        errors.push({ message: message });
+}
+
 module.exports = ValidationContract;

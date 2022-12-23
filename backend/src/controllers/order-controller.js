@@ -59,7 +59,7 @@ exports.put = async(req, res, next) => {
     try {        
         await repository.update(req.body);
         res.status(201).send({
-            message: "Successfully registered order."
+            message: "Successfully updated order."
         });
     } catch (e) {
         console.log(e);

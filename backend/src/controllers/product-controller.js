@@ -62,6 +62,11 @@ exports.post = async(req, res, next) => {
     contract.isGreaterThan(req.body.quantity, 0, "The quantity must be zero or greater than zero.");
     contract.isGreaterThan(req.body.rating, 0, "The rating must be zero or greater than zero.");
     contract.isLessThan(req.body.rating, 5, "The max rating must be 5 or less.");
+    contract.isImage(req.body.image, "The path must be an image path.");
+    
+    if(req.body.image == "") {
+        req.body.image = "./src/assets/img/shirts/default.jpg";
+    }
 
     // Se os dados forem invalidos
     if(!contract.isValid()) {

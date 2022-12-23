@@ -32,6 +32,7 @@ exports.update = async(data) => {
         status: "created"
         },
         {$set: {
+            status: data.status,
             items: data.items
         }}
     )

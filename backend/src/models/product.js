@@ -41,6 +41,7 @@ const schema = new Schema({
     }],
     image: {
         type: String,
+        default:"./src/assets/img/shirts/default.jpg"
     },
     quantity: {
         type: Number,

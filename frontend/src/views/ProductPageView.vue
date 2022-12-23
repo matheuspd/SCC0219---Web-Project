@@ -21,7 +21,7 @@
                         
                         <div v-show="stock">
                             <i class="fa fa-tag"></i> <label for="uname"><b>Quantity</b></label>
-                            <input v-model="quantity" style="width:10%; margin:10px" type="number" id="quantity" placeholder=1 name="quantity" required>
+                            <input v-model="quantity" style="width:10%; margin:10px" type="number" min="1" id="quantity" placeholder=1 name="quantity" required>
                             <br>
                             <button v-on:click="addProd" id="buy-product-bttn">ADD TO CART</button>
                         </div>                 
@@ -216,6 +216,10 @@ export default {
                     //console.log(index);
                     if(foundItem == 1) {
                         //console.log(this.order.items);
+                        if(this.order.items[index].quantity + this.quantity > this.product.quantity) {
+                            alert("You can't add more products than the available stock");
+                            return;
+                        }
                         this.order.items[index].quantity +=  this.quantity;
                         this.order.items[index].price += this.product.price * this.quantity;
                         //console.log(this.order.items);  
@@ -236,6 +240,7 @@ export default {
                         body: JSON.stringify({ 
                             token: sessionStorage.getItem("token"),
                             user: sessionStorage.getItem("id"),
+                            status: this.order.status,
                             items: this.order.items
                         })
                     };

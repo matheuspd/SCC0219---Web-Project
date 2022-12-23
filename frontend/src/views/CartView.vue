@@ -3,8 +3,8 @@
             <div v-show="emptyCart">
                 <h1>Empty Cart</h1>
             </div>
-            <div v-show="!emptyCart" v-for="prod in orders">                
-                <div v-for="(p, index) in products" :key="index" class="img-cover" v-if="prod.user == userId && prod.status=='created'">
+            <div v-show="!emptyCart" v-for="prod in orders" >                
+                <div class="img-cover" v-if="prod.user == userId && prod.status=='created'" v-for="(p, index) in products" :key="index">
                     <img :src="`/${p.image}`" class="logo">
                     <div class="layout-tes">
                         <h3>{{p.title}}</h3>
@@ -17,7 +17,9 @@
                         </div> 
                         <div class="price">
                             <h4>Price: R${{ p.price * prod.items[index].quantity }},00</h4>
-                        </div>                       
+                        </div>
+                        
+                        <button type="button" class="cancelbtn" v-on:click="rmItem(prod.items[index].product)" id="bttn">Remove Item</button>
                     </div>
                 </div>                
             </div>
@@ -29,7 +31,7 @@
                 <h2>TOTAL: R${{ total }},00</h2> 
             </div>
 
-            <button v-on:click="" id="buy-product-bttn">Finish Purchase</button>
+            <button v-on:click="finishPurchase" id="buy-product-bttn">Finish Purchase</button>
         </div>
 
 </template>
@@ -74,6 +76,12 @@ h1 {
     color: #E7E7E7;
     float: inline-end;
     margin-bottom: 10px;
+}
+
+.cancelbtn {
+    float: right;
+    padding: 2%;
+    margin: 1%;
 }
 
 #buy-product-bttn {
@@ -151,11 +159,26 @@ export default {
                 let resp = await fetch("http://localhost:3000/orders/user/" + id, requestOptions);
                 this.orders = await resp.json();
                 //console.log(this.orders)
-                if(this.orders) {
-                    this.emptyCart = false;
-                }
-                else{
-                    this.emptyCart = true;
+                for(let i = 0; i < this.orders.length; i++) {
+                    if(this.orders.length == 0) {
+                        this.emptyCart = true;
+                        return;
+                    }
+                    if(this.orders[i].status == "created") {
+                        if(this.orders[i].items.length == 0) {
+                            this.emptyCart = true;
+                            return;
+                        }
+                        else {
+                            this.emptyCart = false;
+                            this.orders = [{
+                                user: this.orders[i].user,
+                                items: this.orders[i].items,
+                                status: this.orders[i].status
+                            }]
+                            break;
+                        }                        
+                    }                   
                 }
                 this.getProdById();
             }
@@ -167,6 +190,7 @@ export default {
             try {                
                 for(let i = 0; i < this.orders.length; i++) {
                     if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
+                        //console.log(this.orders[i])
                         for(let j = 0; j < this.orders[i].items.length; j++) {
                             const requestOptions = {
                                 method: "POST",
@@ -175,10 +199,11 @@ export default {
                                     token: sessionStorage.getItem("token")
                                 })
                             };
-                            let resp = await fetch("http://localhost:3000/products/admin/" + this.orders[i].items[j].product, requestOptions);
+                            let resp = await fetch("http://localhost:3000/products/user/" + this.orders[i].items[j].product, requestOptions);
                             this.products[j] = await resp.json();
                             this.total += this.orders[i].items[j].quantity * this.products[j].price
                         }
+                        //console.log(this.products)
                         return;
                     }
                 }                
@@ -186,14 +211,85 @@ export default {
                 alert(e);
             }
         },
-        finishPurchase() {
-            /*for(let i = 0; i < this.orders.length; i++) {
-                if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
-                    this.orders[i].status == "done";
-                    return;
+        finishPurchase: async function() {
+            try {
+                for(let i = 0; i < this.orders.length; i++) {
+                    if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
+                        // atualizar order
+                        const requestOptions1 = {
+                            method: "PUT",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ 
+                                token: sessionStorage.getItem("token"),
+                                user: sessionStorage.getItem("id"),
+                                status: "done",
+                                items: this.orders[i].items
+                            })
+                        };
+                        let resp1 = await fetch("http://localhost:3000/orders", requestOptions1);
+                        resp1 = await resp1.json();
+                        //console.log("resp: " + JSON.stringify(resp1));
+
+                        // atualizar dados do produto
+                        for(let j = 0; j < this.orders[i].items.length; j++) {
+                            const requestOptions2 = {
+                                method: "PUT",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ 
+                                    token: sessionStorage.getItem("token"),
+                                    title: this.products[j].title,
+                                    slug: this.products[j].slug,
+                                    description: this.products[j].description,
+                                    price: this.products[j].price,
+                                    image: this.products[j].image,
+                                    tags: this.products[j].tags,
+                                    quantity: this.products[j].quantity - this.orders[i].items[j].quantity      
+                                })
+                            };                    
+                            let resp2 = await fetch("http://localhost:3000/products/" + this.orders[i].items[j].product, requestOptions2);
+                            resp2 = await resp2.json();
+                            //console.log("resp: " + JSON.stringify(resp2));
+                        }
+                        break;
+                    }
                 }
-            }*/
-        }
+                window.location.replace("/");
+            }
+            catch(e) {
+                alert(e);
+            }
+        },
+        rmItem: async function(id: String) {
+            try {                
+                for(let i = 0; i < this.orders.length; i++) {
+                    if(this.orders[i].status == "created" && this.orders[i].user == sessionStorage.getItem("id")) {
+                        //console.log(this.orders[i])
+                        for(let j = 0; j < this.orders[i].items.length; j++) {
+                            if(this.orders[i].items[j].product == id) {
+                                this.orders[i].items.splice(j,1);
+                                const requestOptions = {
+                                    method: "PUT",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ 
+                                        token: sessionStorage.getItem("token"),
+                                        user: sessionStorage.getItem("id"),
+                                        status: "created",
+                                        items: this.orders[i].items
+                                    })
+                                };
+                                let resp = await fetch("http://localhost:3000/orders", requestOptions);
+                                resp = await resp.json();
+                                //console.log("resp: " + JSON.stringify(resp1));                             
+                            }
+                            break;                            
+                        }
+                        window.location.reload();
+                    }
+                }                
+            } catch (e) {
+                alert(e);
+            }
+        }       
     }
 }
 </script>
